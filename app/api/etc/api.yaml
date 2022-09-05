@@ -1,0 +1,20 @@
+Name: api
+Host: 0.0.0.0
+Port: 8080
+
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+  NonBlock: false
+
+VideoRpc:
+  Endpoints:
+    - 127.0.0.1:8887
+  NonBlock: false
+
+
+JwtAuth:
+  AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
+  AccessExpire: 86400

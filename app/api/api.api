@@ -1,0 +1,37 @@
+syntax = "v1"
+
+import "apis/user.api"
+import "apis/video.api"
+
+@server (
+	prefix: /douyin/user
+	group: user
+)
+service api {
+	@handler userRegister
+	post /register (RegisterRequest) returns (RegisterResponse)
+	
+	@handler userLogin
+	post /login (LoginRequest) returns (LoginResponse)
+}
+
+@server (
+	prefix: /douyin/user
+	group: user
+	jwt: JwtAuth
+)
+service api {
+	@handler userInfo
+	get / () returns (UserInfoResponse)
+}
+
+@server (
+	prefix: /douyin/publish
+	group: video
+	jwt: JwtAuth
+	middleware: UploadFile
+)
+service api {
+	@handler publishVideo
+	post /action (PublishVideoReq) returns (PublishVideoResp)
+}

@@ -1,0 +1,32 @@
+syntax = "v1"
+
+type (
+	RegisterRequest {
+		UserName string `form:"username"`
+		PassWord string `form:"password"`
+	}
+
+	RegisterResponse {
+		UserId int64 `json:"userId"`
+		Token  string `json:"token"`
+	}
+
+	LoginRequest {
+		UserName string `form:"username"`
+		PassWord string `form:"password"`
+	}
+	LoginResponse {
+		UserId int64 `json:"userId"`
+		Token  string `json:"token"`
+	}
+
+	UserInfoResponse{
+		UserId int64  `json:"userId"`
+		UserName string `json:"userName"`
+		FollowCount int64 `json:"followCount"`
+		FollowerCount int64 `json:"followerCount"`
+		IsFollow bool `json:"isFollow"`
+		TotalFavorited int64 `json:"totalFavorited"`
+		FavoriteCount int64 `json:"favoriteCount"`
+	}
+)

@@ -1,0 +1,23 @@
+syntax = "v1"
+
+info(
+    title: "type title here"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+
+type PublishVideoReq{
+    PlayUrl string `json:"playUrl"`
+    CoverUrl string `json:"coverUrl"`
+    Title string `json:"title"`
+}
+
+
+type PublishVideoResp{
+    PlayUrl string `json:"playUrl"`
+    CoverUrl string `json:"coverUrl"`
+    Title string `json:"title"`
+}
