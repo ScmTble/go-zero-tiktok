@@ -34,4 +34,7 @@ service api {
 service api {
 	@handler publishVideo
 	post /action (PublishVideoReq) returns (PublishVideoResp)
+	
+	@handler publishVideoList
+	get /list/:userId (PublishVideoListReq) returns (PublishVideoListResp)
 }

@@ -102,6 +102,7 @@ func (m *defaultVideosModel) Insert(ctx context.Context, data *Videos) (sql.Resu
 
 func (m *defaultVideosModel) Update(ctx context.Context, data *Videos) error {
 	douyinVideosIdKey := fmt.Sprintf("%s%v", cacheDouyinVideosIdPrefix, data.Id)
+
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, videosRowsWithPlaceHolder)
 		return conn.ExecCtx(ctx, query, data.AuthorId, data.PlayUrl, data.CoverUrl, data.PublishTime, data.Title, data.Id)

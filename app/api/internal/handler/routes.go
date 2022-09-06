@@ -49,6 +49,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/action",
 					Handler: video.PublishVideoHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/list/:userId",
+					Handler: video.PublishVideoListHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),

@@ -21,3 +21,31 @@ type PublishVideoResp{
     CoverUrl string `json:"coverUrl"`
     Title string `json:"title"`
 }
+
+type PublishVideoListReq{
+    userId int64 `path:"userId"`
+}
+
+
+type UserInfo {
+    UserId int64  `json:"userId"`
+    UserName string `json:"userName"`
+    FollowCount int64 `json:"followCount"`
+    FollowerCount int64 `json:"followerCount"`
+    IsFollow bool `json:"isFollow"`
+}
+
+type Video {
+    id int64 `json:"id"`
+    author UserInfo `json:"userInfo"`
+    playUrl string `json:"playUrl"`
+    coverUrl string `json:"coverUrl"`
+    favoriteCount int64 `json:"favoriteCount"`
+    commentCount int64 `json:"commentCount"`
+    isFavorite bool `json:"isFavorite"`
+    title string `json:"title"`
+}
+
+type PublishVideoListResp{
+    videos []Video `json:"videos"`
+}
