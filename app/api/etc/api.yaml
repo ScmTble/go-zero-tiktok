@@ -2,11 +2,16 @@ Name: api
 Host: 0.0.0.0
 Port: 8080
 
+#UserRpc:
+#  Etcd:
+#    Hosts:
+#      - 127.0.0.1:2379
+#    Key: user.rpc
+#  NonBlock: false
+
 UserRpc:
-  Etcd:
-    Hosts:
-      - 127.0.0.1:2379
-    Key: user.rpc
+  Endpoints:
+    - 127.0.0.1:8888
   NonBlock: false
 
 VideoRpc:
