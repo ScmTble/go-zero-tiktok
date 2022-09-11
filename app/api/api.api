@@ -2,6 +2,7 @@ syntax = "v1"
 
 import "apis/user.api"
 import "apis/video.api"
+import "apis/like.api"
 
 @server (
 	prefix: /douyin/user
@@ -37,4 +38,14 @@ service api {
 	
 	@handler publishVideoList
 	get /list/:userId (PublishVideoListReq) returns (PublishVideoListResp)
+}
+
+@server (
+	prefix: /douyin/favourite
+	group: like
+	jwt: JwtAuth
+)
+service api {
+	@handler LikeVideo
+	post /action (LikeReq) returns (LikeResp)
 }

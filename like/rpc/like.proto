@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package like;
+option go_package = "./like";
+
+
+message LikeVideoReq{
+  int64 UserId = 1;
+  int64 VideoId = 2;
+  uint32 StatusCode = 3;
+}
+
+message LikeVideoResp {
+  bool StatusCode = 1;
+}
+
+service Like{
+  rpc LikeVideo (LikeVideoReq) returns (LikeVideoResp);
+}

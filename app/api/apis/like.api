@@ -1,0 +1,18 @@
+syntax = "v1"
+
+info(
+    title: "type title here"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+type LikeReq {
+    videoId int64 `json:"videoId"`
+    statusCode bool `json:"statusCode"` // true 点赞 / false 取消点赞
+}
+
+type LikeResp {
+    statusCode bool `json:"statusCode"` // true 成功 / false 失败
+}

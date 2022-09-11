@@ -69,3 +69,12 @@ type Video struct {
 type PublishVideoListResp struct {
 	Videos []Video `json:"videos"`
 }
+
+type LikeReq struct {
+	VideoId    int64 `json:"videoId"`
+	StatusCode bool  `json:"statusCode"` // true 点赞 / false 取消点赞
+}
+
+type LikeResp struct {
+	StatusCode bool `json:"statusCode"` // true 成功 / false 失败
+}

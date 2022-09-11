@@ -1,0 +1,24 @@
+Name: like.mq
+Mq:
+  Username: root
+  Password: "123456"
+  Host: 127.0.0.1
+  Port: 5672
+  ListenerQueues:
+    - Name: LikeQueue
+      Durable: false
+      AutoDelete: false
+      Exclusive: false
+      NoLocal: false
+      NoWait: false
+      ConsumerConf:
+        AutoAck: true
+      BindConf:
+        Exchange: LikeExchange
+  Exchange:
+    Name: LikeExchange
+    Type: fanout
+    Durable: true
+    AutoDelete: false
+    Internal: false
+    NoWait: false

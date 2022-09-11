@@ -1,0 +1,15 @@
+Name: like.rpc
+ListenOn: 127.0.0.1:8886
+#Etcd:
+#  Hosts:
+#  - 127.0.0.1:2379
+#  Key: like.rpc
+Mysql:
+  DataSource: root:123456@tcp(127.0.0.1:3306)/douyin?charset=utf8mb4&parseTime=True&loc=Local
+
+
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Type: node
+    Pass:
+Mode: dev

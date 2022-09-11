@@ -19,6 +19,8 @@ VideoRpc:
     - 127.0.0.1:8887
   NonBlock: false
 
+Redis:
+  Host: 127.0.0.1:6379
 
 JwtAuth:
   AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl

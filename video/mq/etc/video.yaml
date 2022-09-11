@@ -1,0 +1,8 @@
+Name: video.mq
+Mq:
+  Username: root
+  Password: "123456"
+  Host: 127.0.0.1
+  Port: 5672
+  ListenerQueues:
+    - Name: testqueue
