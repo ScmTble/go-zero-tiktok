@@ -42,7 +42,6 @@ service api {
 	get /list/:userId (PublishVideoListReq) returns (PublishVideoListResp)
 }
 
-
 // 点赞相关服务
 @server (
 	prefix: /douyin/favourite

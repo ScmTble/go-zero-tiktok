@@ -12,12 +12,12 @@ Port: 8080
 UserRpc:
   Endpoints:
     - 127.0.0.1:8888
-  NonBlock: false
+  NonBlock: true
 
 VideoRpc:
   Endpoints:
     - 127.0.0.1:8887
-  NonBlock: false
+  NonBlock: true
 
 Redis:
   Host: 127.0.0.1:6379
@@ -25,3 +25,10 @@ Redis:
 JwtAuth:
   AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
   AccessExpire: 86400
+
+
+RabbitMQ:
+  Username: root
+  Password: '123456'
+  Host: 127.0.0.1
+  Port: 5672

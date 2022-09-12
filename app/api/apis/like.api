@@ -10,7 +10,7 @@ info(
 
 type LikeReq {
     videoId int64 `json:"videoId"`
-    statusCode bool `json:"statusCode"` // true 点赞 / false 取消点赞
+    statusCode int64 `json:"statusCode"` // true 点赞 / false 取消点赞
 }
 
 type LikeResp {

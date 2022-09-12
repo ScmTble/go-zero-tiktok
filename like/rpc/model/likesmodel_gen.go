@@ -43,7 +43,7 @@ type (
 		Id      int64 `db:"id"`       // 自增主键
 		UserId  int64 `db:"user_id"`  // 点赞用户id
 		VideoId int64 `db:"video_id"` // 被点赞的视频id
-		Cancel  int64 `db:"cancel"`   // 默认点赞为0，取消赞为1
+		Cancel  int64 `db:"cancel"`   // 默认点赞为1，取消赞为0
 	}
 )
 

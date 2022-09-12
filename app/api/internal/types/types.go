@@ -72,7 +72,7 @@ type PublishVideoListResp struct {
 
 type LikeReq struct {
 	VideoId    int64 `json:"videoId"`
-	StatusCode bool  `json:"statusCode"` // true 点赞 / false 取消点赞
+	StatusCode int64 `json:"statusCode"` // true 点赞 / false 取消点赞
 }
 
 type LikeResp struct {
