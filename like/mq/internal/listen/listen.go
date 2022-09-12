@@ -1,6 +1,7 @@
 package listen
 
 import (
+	"context"
 	"fmt"
 	"github.com/streadway/amqp"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -10,9 +11,10 @@ import (
 )
 
 type (
-	ConsumeHandler func(svcCtx *svc.ServiceContext, message string) error
+	ConsumeHandler func(ctx context.Context, svcCtx *svc.ServiceContext, data []byte) error
 
 	RabbitListener struct {
+		ctx     context.Context
 		svcCtx  *svc.ServiceContext
 		conn    *amqp.Connection
 		channel *amqp.Channel
@@ -22,8 +24,12 @@ type (
 )
 
 func (q RabbitListener) Start() {
-	q.ExchangeDeclare()
-	q.DeclareQueueAndBind()
+	if err := q.ExchangeDeclare(nil); err != nil {
+		log.Fatalln(err)
+	}
+	if err := q.DeclareQueueAndBind(nil); err != nil {
+		log.Fatalln(err)
+	}
 
 	for _, que := range q.svcCtx.Config.Mq.ListenerQueues {
 		msg, err := q.channel.Consume(
@@ -41,7 +47,7 @@ func (q RabbitListener) Start() {
 
 		go func() {
 			for d := range msg {
-				if err := q.handler(q.svcCtx, string(d.Body)); err != nil {
+				if err := q.handler(q.ctx, q.svcCtx, d.Body); err != nil {
 					logx.Errorf("Error on consuming: %s, error: %v", string(d.Body), err)
 				}
 			}
@@ -58,8 +64,9 @@ func (q RabbitListener) Stop() {
 }
 
 // MustNewListener 创建RabbitMQ监听者
-func MustNewListener(svcCtx *svc.ServiceContext, handler ConsumeHandler) queue.MessageQueue {
+func MustNewListener(ctx context.Context, svcCtx *svc.ServiceContext, handler ConsumeHandler) queue.MessageQueue {
 	listener := RabbitListener{
+		ctx:     ctx,
 		svcCtx:  svcCtx,
 		handler: handler,
 		forever: make(chan bool),
@@ -80,7 +87,7 @@ func MustNewListener(svcCtx *svc.ServiceContext, handler ConsumeHandler) queue.M
 }
 
 // ExchangeDeclare 声明交换机
-func (q RabbitListener) ExchangeDeclare() error {
+func (q RabbitListener) ExchangeDeclare(table amqp.Table) error {
 	exchange := q.svcCtx.Config.Mq.Exchange
 	return q.channel.ExchangeDeclare(
 		exchange.Name,
@@ -89,11 +96,11 @@ func (q RabbitListener) ExchangeDeclare() error {
 		exchange.AutoDelete,
 		exchange.Internal,
 		exchange.NoWait,
-		nil,
+		table,
 	)
 }
 
-func (q RabbitListener) DeclareQueueAndBind() error {
+func (q RabbitListener) DeclareQueueAndBind(table amqp.Table) error {
 	if len(q.svcCtx.Config.Mq.ListenerQueues) == 0 {
 		return nil
 	}
@@ -105,19 +112,19 @@ func (q RabbitListener) DeclareQueueAndBind() error {
 			conf.AutoDelete,
 			conf.Exclusive,
 			conf.NoWait,
-			nil,
+			table,
 		)
-		err = q.bind(conf.Name, conf.BindConf.RouterKey, conf.BindConf.Exchange, conf.BindConf.NotWait)
+		err = q.bind(conf.Name, conf.BindConf.RouterKey, conf.BindConf.Exchange, conf.BindConf.NotWait, nil)
 	}
 	return err
 }
 
-func (q RabbitListener) bind(queueName string, RouterKey string, exchange string, notWait bool) error {
+func (q RabbitListener) bind(queueName string, RouterKey string, exchange string, notWait bool, table amqp.Table) error {
 	return q.channel.QueueBind(
 		queueName,
 		RouterKey,
 		exchange,
 		notWait,
-		nil,
+		table,
 	)
 }

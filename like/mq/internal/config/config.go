@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"github.com/zeromicro/go-zero/core/service"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 // MqConf RabbitMQ配置
@@ -51,6 +52,7 @@ type QueueConf struct {
 type Config struct {
 	service.ServiceConf        // 基础配置
 	Mq                  MqConf // RabbitMQ配置
+	LikeRpc             zrpc.RpcClientConf
 }
 
 // GetUrl 获取amqp连接url

@@ -4,6 +4,7 @@ import "apis/user.api"
 import "apis/video.api"
 import "apis/like.api"
 
+// 用户相关服务
 @server (
 	prefix: /douyin/user
 	group: user
@@ -26,6 +27,7 @@ service api {
 	get / () returns (UserInfoResponse)
 }
 
+// 视频相关服务
 @server (
 	prefix: /douyin/publish
 	group: video
@@ -40,6 +42,8 @@ service api {
 	get /list/:userId (PublishVideoListReq) returns (PublishVideoListResp)
 }
 
+
+// 点赞相关服务
 @server (
 	prefix: /douyin/favourite
 	group: like

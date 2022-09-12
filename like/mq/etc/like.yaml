@@ -22,3 +22,7 @@ Mq:
     AutoDelete: false
     Internal: false
     NoWait: false
+LikeRpc:
+  Endpoints:
+    - 127.0.0.1:8886
+  NonBlock: true

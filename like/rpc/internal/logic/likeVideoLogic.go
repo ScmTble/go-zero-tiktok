@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"tiktok/like/rpc/internal/svc"
 	"tiktok/like/rpc/like"
@@ -25,6 +26,8 @@ func NewLikeVideoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LikeVid
 
 func (l *LikeVideoLogic) LikeVideo(in *like.LikeVideoReq) (*like.LikeVideoResp, error) {
 	// todo: add your logic here and delete this line
-
+	fmt.Println(in.VideoId)
+	fmt.Println(in.UserId)
+	fmt.Println(in.StatusCode)
 	return &like.LikeVideoResp{}, nil
 }
